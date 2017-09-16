@@ -66,4 +66,7 @@ Es posible incluir hojas de estilo CSS editando directamente el fichero index.ht
     npm install --save bootstrap
     ````
 
+### ¿Cómo funciona Angular?
 
+Angular funciona de una manera un tanto curiosa. Si observamos el fichero HTML (index.html) podemos observar que hay una línea que pone entre etiquetas "Loading". Pues bien, es ahí el lugar que Angular sustituirá por la plantilla HTML que definamos, de tal forma que, cuando nosotros ejecutamos la orden ng serve y el usuario solicite la URL, esa será la plantilla embebida que se descargará. Todo esto funciona, obviamente, porque edita en tiempo de ejecución el DOM del navegador del usuario.
+Similarmente, si observamos con las herramientas del desarrollador de Chrome el código de la página podemos ver que se han embebido, por ejemplo, los ficheros CSS y no se encuentran enlazados, como vendría a ser lógico. 
