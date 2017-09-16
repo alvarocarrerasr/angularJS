@@ -8,7 +8,7 @@ Angular se define como "Javascript that scales". Hace años, nunca se pensó que
 
 En la versión 1 de Angular, no se desarrollaba usando TypeScript. Sin embargo, en la 2, Google (desarrollador principal de Angular) y Microsoft (desarrollador principal de TypeScript) decidieron ponerse de acuerdo para poder utilizar Angular usando TypeScript.
 
-Un sitio Web de Angular cuenta con un fichero HTML que desplegará todas las vistas de nuestro sitio. Será labor de Angular traducir lo que hemos programado a HTML, JS... y de mostrar al usuario, utilizando las APIs del DOM, el sitio Web, dando así una apariencia de carga muchísimo más rápida (ya que no deberemos volver a descargar los contenidos del servidor cada vez que se realiza una petición HTTP).
+Un sitio Web de Angular cuenta con un fichero HTML que desplegará todas las vistas de nuestro sitio. Será labor de Angular traducir lo que hemos programado a HTML, JS... y de mostrar al usuario, utilizando las APIs del DOM, el sitio Web, dando así una apariencia de carga muchísimo más rápida (ya que no deberemos volver a descargar los contenidos del servidor cada vez que se realiza una petición HTTP). Los sitios web fabricados usando Angular se caracterizan por ser muy reactivos (Reactive).
 
 ## Versiones de Angular.
 
@@ -55,5 +55,15 @@ Algunos de los que podemos encontrar son:
     * Fichero index.html: también un fichero destacado. Será lo que nuestros usuarios verán, pero, por lo general, nosotros no lo manipularemos, sino que será Angular mediante las APIs del DOM las que harán que el usuario vea lo que hemos programado.
     * Carpeta app: aquí se encontrarán la mayoría de archivos que editaremos en la mayor parte del tiempo.
 4. Carpeta node_modules: aquí se instalarán los paquetes que solicitemos mediante la orden npm install.
+
+### Instalación de plantillas CSS en un proyecto Angular
+
+Es posible incluir hojas de estilo CSS editando directamente el fichero index.html. Sin embargo, es mejor no hacerlo así, ya que Angular nos ofrece una solución mucho mejor.
+1. Por defecto, Angular nos define un fichero "styles.css" (que se encuentra en /src), donde podremos definir nuestros propios estilos.
+2. También podremos utilizar el fichero .angular-cli.json (/ del proyecto). En ese objeto JSON podemos definir en la propiedad apps.styles, un nuevo fichero CSS, que se enlazará con el Webpack de Angular.
+    * De esta forma podremos instalar muy fácilmente plantillas o, incluso frameworks como Bootstrap.
+    ````bash
+    npm install --save bootstrap
+    ````
 
 
