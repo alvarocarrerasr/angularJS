@@ -69,4 +69,43 @@ Es posible incluir hojas de estilo CSS editando directamente el fichero index.ht
 ### ¿Cómo funciona Angular?
 
 Angular funciona de una manera un tanto curiosa. Si observamos el fichero HTML (index.html) podemos observar que hay una línea que pone entre etiquetas "Loading". Pues bien, es ahí el lugar que Angular sustituirá por la plantilla HTML que definamos, de tal forma que, cuando nosotros ejecutamos la orden ng serve y el usuario solicite la URL, esa será la plantilla embebida que se descargará. Todo esto funciona, obviamente, porque edita en tiempo de ejecución el DOM del navegador del usuario.
+
 Similarmente, si observamos con las herramientas del desarrollador de Chrome el código de la página podemos ver que se han embebido, por ejemplo, los ficheros CSS y no se encuentran enlazados, como vendría a ser lógico. 
+
+Es importante señalar que cuando ejecutamos el comando ng serve, Angular ejecuta el fichero main.ts, que se encuentra en /src
+
+### Componentes en Angular
+
+Los componentes son la **pieza clave de Angular**. **Todo en Angular puede ser un componente.** Por ejemplo, en el home de un blog, **podríamos encontrar** los siguientes componentes:
+
+1. El header, donde reside el logotipo del blog, así como un cuadro de texto, con el fin de realizar búsquedas.
+2. Un menú lateral, donde se pueden acceder a las diferentes secciones del sitio.
+3. El cuerpo del blog, es decir, donde se encuentran las entradas.
+4. El footer.
+5. ...
+
+Y cada componente tiene su propio código (HTML, CSS y JavaScript) totalmente independiente, de tal forma que podremos reusarlos en cualquier momento, ya que son partes que se "embeben" en el código HTML que finalmente será entregado al navegador web del usuario.
+
+Tendremos un componente principal (root component), del que se desplegarán el resto de componentes.
+
+#### Creando un componente en Angular
+
+Crearemos los componentes en Angular en la carpeta /src/app. Por convención, lo suyo sería crear una carpeta adicional, dentro de app para cada componente.
+El fichero fundamental de un componente es el que alberga el código TypeScript. Así pues, será el primero que deberemos crear.
+La estructura más básica es:
+````typescript
+import {Component} from '@angular/core';
+
+@Component({
+    selector  : 'app-infobox',
+    template : './infobox.component.html'
+})
+export class InfoboxComponent {
+
+}
+
+````
+
+Del anterior código destaco:
+1. 'selector': Selector será como llamaremos al componente desde otros componentes.
+2. Template: Será la plantilla HTML del componente.
