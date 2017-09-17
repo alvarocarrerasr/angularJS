@@ -1,10 +1,10 @@
 # Intro
 
-Angular 2 es un framework. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de Angular genera código en este segundo lenguaje.
+Angular 2 es un framework. Sin embargo, no podemos entender hoy en día Angular sin TypeScript. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de TypeScript genera código en este segundo lenguaje.
 
 Al ser un lenguaje tipado, nos va a permitir recibir mucho feedback en tiempo de desarrollo y, evitar así, los errores en tiempo de ejecución, que son, claramente los menos deseados.
 
-Angular se define como "Javascript that scales". Hace años, nunca se pensó que JS iba a ser lo que es hoy: un gigante con el que se pueden programar robots, páginas Web, aplicaciones móviles, aplicaciones de escritorio y así un largo etcétera. Por este motivo y viendo el grandísimo crecimiento que ha tenido este lenguaje de programación, Microsoft ha lanzado TypeScript, que básicamente consiste en un JS mejorado (o vitaminado), en el que no solo tenemos Orientación a Objetos (en las versiones iniciales de JS esto no existía), sino que además tiene tipado de datos de tipo estático, que además es fuertemente tipado.
+TypeScript se define como "Javascript that scales". Hace años, nunca se pensó que JS iba a ser lo que es hoy: un gigante con el que se pueden programar robots, páginas Web, aplicaciones móviles, aplicaciones de escritorio y así un largo etcétera. Por este motivo y viendo el grandísimo crecimiento que ha tenido este lenguaje de programación, Microsoft ha lanzado TypeScript, que básicamente consiste en un JS mejorado (o vitaminado), en el que no solo tenemos Orientación a Objetos (en las versiones iniciales de JS esto no existía), sino que además tiene tipado de datos de tipo estático, que además es fuertemente tipado.
 
 En la versión 1 de Angular, no se desarrollaba usando TypeScript. Sin embargo, en la 2, Google (desarrollador principal de Angular) y Microsoft (desarrollador principal de TypeScript) decidieron ponerse de acuerdo para poder utilizar Angular usando TypeScript.
 
