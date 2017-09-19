@@ -1,6 +1,6 @@
 # Intro
 
-Angular 2 es un framework. Sin embargo, no podemos entender hoy en día Angular sin TypeScript. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de TypeScript genera código en este segundo lenguaje.
+Angular 2 es un framework web muy utilizado hoy en día. Sin embargo, no podemos entender hoy en día Angular sin TypeScript. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de TypeScript genera código en este segundo lenguaje.
 
 Al ser un lenguaje tipado, nos va a permitir recibir mucho feedback en tiempo de desarrollo y, evitar así, los errores en tiempo de ejecución, que son, claramente los menos deseados.
 
@@ -84,11 +84,11 @@ Los componentes son la **pieza clave de Angular**. **Todo en Angular puede ser u
 4. El footer.
 5. ...
 
-Y cada componente tiene su propio código (HTML, CSS y JavaScript) totalmente independiente, de tal forma que podremos reusarlos en cualquier momento, ya que son partes que se "embeben" en el código HTML que finalmente será entregado al navegador web del usuario.
+Y cada componente tiene su propio código (HTML, CSS y JavaScript) totalmente independiente, de tal forma que podremos reusarlos en cualquier momento, ya que son partes que se "embeben" en el código HTML que finalmente será entregado al navegador web del usuario. Además, los componentes son **reusables**.
 
 Tendremos un componente principal (root component), del que se desplegarán el resto de componentes.
 
-#### Creando un componente en Angular
+#### Creando un componente en Angular de forma manual
 
 Crearemos los componentes en Angular en la carpeta /src/app. Por convención, lo suyo sería crear una carpeta adicional, dentro de app para cada componente.
 El fichero fundamental de un componente es el que alberga el código TypeScript. Así pues, será el primero que deberemos crear.
@@ -98,7 +98,8 @@ import {Component} from '@angular/core';
 
 @Component({
     selector  : 'app-infobox',
-    template : './infobox.component.html'
+    templateUrl : './infobox.component.html',
+    styleUrls : ['']
 })
 export class InfoboxComponent {
 
@@ -109,3 +110,21 @@ export class InfoboxComponent {
 Del anterior código destaco:
 1. 'selector': Selector será como llamaremos al componente desde otros componentes.
 2. Template: Será la plantilla HTML del componente.
+
+**NOTA: ojo con usar template en vez de templateUrl**. Estaremos devolviendo HTML y no una plantilla. Tanto selector, como styleUrl son opciones, pero templateUrl/template son siempre **obligatorios**.
+
+#### Módulos en Angular 
+Un módulo en Angular es un conjunto de funcionalidades, que, en nuestro caso, formarán la app final. Por tanto, un módulo engloba los componentes, haciendo así más fácil el deploy de los mismos.
+
+La configuración del módulo se puede encontrar en /src/app/app.module.ts y aquí (en el objeto declarations) es donde deberemos declarar los distintos componentes. Es importante destacar que **deberemos registrar cada uno de los componentes** (si lo hacemos de forma manual), ya que Angular no escaneará los directorios buscando componentes.
+
+### Creando un componente en Angular de forma automática
+Todos los pasos anteriores pueden ser sustituidos por un simple comando:
+```bash
+ng generate component [component-name]
+```
+O bien, el comando reducido
+```bash
+ng g c [component-name]
+```
+El mismo Angular nos creará una carpeta con el HTML, el fichero TypeScript de configuración del componente, un fichero de tests, así como los diferentes selectors y habrá añadido la línea correspondiente para registrarr el componente en el módulo de la aplicación.
