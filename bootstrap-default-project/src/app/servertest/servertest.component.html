@@ -1,3 +1,11 @@
 <p>
   servertest works!
 </p>
+
+<div id="col-xs-12 info">
+  <span class="badge badge-secondary"> This is a test!</span>
+</div>
+<p class="text-center"> My name is {{ name }} and I'm {{ age }} years old.
+
+<h2 class="text-center">Have I clicked the button? {{hasClicked}}</h2>
+<button class="btn btn-primary" [disabled]="disableButton" (click)="onClickIfYouCanClicked()">Click me if you can!</button>

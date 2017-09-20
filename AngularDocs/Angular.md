@@ -21,7 +21,7 @@ Tenemos 2 versiones de Angular (a fecha Septiembre de 2017):
 
 Se requerirá tener instalado NodeJS, así como NPM y Angular. Ver fichero "AngularCLITypeScript.md", que se encuentra en el root del repo para más información.
 
-# Angular
+# Angular. Introducción a Angular.
 
 Los IDEs recomendados para programar en Angular son:
 
@@ -32,7 +32,7 @@ Otros usuarios preferirán el famosísimo Atom, de Github o Sublime Text. Y siem
 
 ## Creando un proyecto con Angular.
 
-Creamos un proyecto de Angular mediante el comando
+Creamos un proyecto de Angular cmediante el comando
 ````bash
 ng new [nombre del proyecto]
 ````
@@ -109,7 +109,18 @@ export class InfoboxComponent {
 
 Del anterior código destaco:
 1. 'selector': Selector será como llamaremos al componente desde otros componentes.
-2. Template: Será la plantilla HTML del componente.
+    * El selector puede ser:
+        1. un elemento. Ej: app-infobox. Lo referenciaremos desde el HTML como <app-infobox></app-infobox>
+        2. un atributo. Ej: [app-infobox]. Lo referenciaremos desde el HTML como <div app-infobox></div>
+        3. una clase: Ej: .app-infobox. Lo referenciaremos desde el HTML como <div class=".app-infobox"></div>
+    * En definitiva, hay tres métodos para referenciar un componente Angular desde el HTML. Sin embargo, el más común será el primero.
+2. templateUrl: Será la plantilla HTML del componente. En ruta relativa
+3. styleUrls: Es un array en el que colocaremos la ruta relativa de cada uno de los estilos que queremos en nuestro sitio web.
+
+Además de los anteriores podremos añadir:
+
+4. style: es un array de strings (recordemos que acento agudo para hacer un array multilínea en JS) de código CSS. Útil si queremos colocar poco código CSS (poquísimas líneas).
+5. template: código HTML que formará el template de la página. Útil si la plantilla tiene muy pocas líneas de código.
 
 **NOTA: ojo con usar template en vez de templateUrl**. Estaremos devolviendo HTML y no una plantilla. Tanto selector, como styleUrl son opciones, pero templateUrl/template son siempre **obligatorios**.
 
@@ -128,3 +139,47 @@ O bien, el comando reducido
 ng g c [component-name]
 ```
 El mismo Angular nos creará una carpeta con el HTML, el fichero TypeScript de configuración del componente, un fichero de tests, así como los diferentes selectors y habrá añadido la línea correspondiente para registrarr el componente en el módulo de la aplicación.
+
+## Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.
+
+En ocasiones nos puede resultar interesante poder comunicar, por ejemplo, una variable almacenada en el código TypeScript en el HTML (o viceversa). O incluso nos puede llegar a interesar un canal de comunicación de ambos sentidos. Todo esto se tratará en este apartado.
+
+### Output Data (Business Logic -> HTML)
+El método más común es *String interpolation*.
+En el código HTML de la plantilla insertaremos:
+```html
+<p>My name is {{ name }} and I'm {{ age }} years old.</p>
+```
+Y en el código TypeScript
+```typescript
+export class MyComponent{
+    name : string = "Alvaro",
+    age : number = 21
+}
+```
+Nota: todo el texto (monolínea) encerrado entre curly braces/llaves ( {{ }} ), Angular lo convertirá en un String (en el caso de que no sea String, lo intentará castear automáticamente.)
+
+Nota 2: en el código TypeScript anterior no he añadido el tipo de cada una de las variables porque TypeScript indica que no es necesario, ya que lo infiere de forma automática.
+
+#### Property binding
+Esta es una característica derivada de la anterior. Supongamos que queremos modificar en tiempo de ejecución una propiedad de un elemento del DOM. Angular nos lo pone muy fácil, ya que será tan fácil como indicarle que la variable va a almacenar un valor que se deberá colocar como propiedad. Por ejemplo:
+
+```html
+<button [disabled]="disableButton">Click me if you can!</button>
+```
+
+Si disableButton está con el valor false, entonces la propiedad disabled del botón tendrá este mismo valor.
+A esta característica de Angular se la denomina Property Binding.
+
+Ojo: property binding no lleva llaves (curly braces). Angular no lo permite. Deben ser comillas dobles. 
+
+### Input Data (HTML -> Business Logic)
+Para hacer input data, es decir, para poder reaccionar a los eventos del usuario utilizaremos Event Binding, muy similar a los típicos on... de HTML y Javascript.
+Para poder reaccionar a los clicks de un botón (ejemplo anterior utilizaremos el event click):
+```html
+<button (click)="onClickButton()">Click me if you can!</button>
+```
+
+En el sitio web de [MDN](https://developer.mozilla.org/en-US/docs/Web/Events) podemos encontrar los diversos eventos que existen. Solo habría que ver cuáles son compatibles con el objeto que queremos utilizar.
+
+### Two-way binding (Business Logic <-> HTML)
