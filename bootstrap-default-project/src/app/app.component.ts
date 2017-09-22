@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  username = '';
+  onInputUsername = function(event: Event){
+    this.username = (<HTMLInputElement>event.target).value;
+  };
+
 }

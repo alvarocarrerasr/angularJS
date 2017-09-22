@@ -20,3 +20,9 @@
 
 <p> And here you have our new component </p>
 <app-servertest></app-servertest>
+<form id="newForm">
+  <p>Please type your name below:</p>
+  <input type="text" name="name" id="name" (input)="onInputUsername($event)">
+  <input type="submit" value="Enviar">
+</form>
+<p class="text-center"> {{ username }} </p>

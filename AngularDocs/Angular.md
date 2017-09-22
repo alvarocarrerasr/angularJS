@@ -182,4 +182,27 @@ Para poder reaccionar a los clicks de un botón (ejemplo anterior utilizaremos e
 
 En el sitio web de [MDN](https://developer.mozilla.org/en-US/docs/Web/Events) podemos encontrar los diversos eventos que existen. Solo habría que ver cuáles son compatibles con el objeto que queremos utilizar.
 
+Los eventos, por lo general, llaman a la función listener con un argumento ($event), que contiene datos útiles, como qué elemento lo ha llamado o por qué. 
+
 ### Two-way binding (Business Logic <-> HTML)
+
+Podremos realizar el two-way binding por medio del 'ngModel', para lo cual deberemos importar @angular/forms en el array imports dentro de AppModule. Es decir, deberemos añadir lo siguiente:
+```typescript
+import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+```
+En la cabecera de app.module.ts, además de hacer la importación adecuada:
+```typescript
+@NgModule({
+  declarations: [
+    ....
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [...],
+  bootstrap: [...]
+})
+export class ... { ... }
+```
