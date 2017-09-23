@@ -188,8 +188,7 @@ Los eventos, por lo general, llaman a la función listener con un argumento ($ev
 
 Podremos realizar el two-way binding por medio del 'ngModel', para lo cual deberemos importar @angular/forms en el array imports dentro de AppModule. Es decir, deberemos añadir lo siguiente:
 ```typescript
-import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 ```
 En la cabecera de app.module.ts, además de hacer la importación adecuada:
 ```typescript
@@ -198,7 +197,7 @@ En la cabecera de app.module.ts, además de hacer la importación adecuada:
     ....
   ],
   imports: [
-    BrowserModule,
+    ...
     FormsModule
   ],
   providers: [...],
@@ -206,3 +205,33 @@ En la cabecera de app.module.ts, además de hacer la importación adecuada:
 })
 export class ... { ... }
 ```
+
+Por último conectaremos el elemento HTML con Angular mediante [(ngModel)]="usernameNew" (en este caso uniríamos un doble camino con la variable usernameNew).
+
+## Directives
+
+Directives son instrucciones que damos desde Angular para modificar el DOM. Hay directives que se realizan desde el template HTML (p.ej. las etiquetas que vimos para añadir un componente) y otras que se hacen desde el mismo código TypeScript, que se crearán mediante decorators en el código.
+### Structure Directives
+Son directivas que modifican el DOM, añadiendo o eliminando elementos. Por lo general, suelen llevar un asterisco (*) justo delante de la directiva (así indicamos que son de este tipo).
+1. ngIf: para una estructura condicional.
+    * Para else, el camino se complica un poco:
+        ```html
+        <p *ngIf="booleanCondiction; else noBool"> Message to show</p>
+        <ng-template #noBool>
+        <p>Else message</p>
+        ```
+### Attribute Directives
+La mayoría de directivas **no** añaden o eliminan elementos, sino que modifican aquellos elementos que tienen asociados.
+#### NgStyle, una directiva para cambiar el estilo de los elementos.
+Una directiva bastante útil y que sirve para cambiar el estilo de los diferentes elementos es ngStyle. 
+
+1. Si la propiedad a cambiar la escribimos con un guión intermedio, la propiedad irá entre comillas simples.
+    ```html
+    <p [ngStyle]="{'background-color':'red'}">Text</p>
+    ```
+2. Si, por el contrario, va en *Camel Case*, se escribirá sin comillas
+    ```html
+    <p [ngStyle]="{backgroundColor:'red'}">Text</p>
+    ```
+**Importante**: la directiva es **ngStyle** y no **[ngStyle]**. Se pone entre corchetes porque vamos a modificar una propiedad de un elemento (ya se ha visto en otro apartado).
+**Nota**: en vez de poner directamente el valor (en este caso red), podríamos haber puesto una función.

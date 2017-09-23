@@ -8,8 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
   username = '';
-  onInputUsername = function(event: Event){
+  usernameNew = 'usuarioInicial';
+  values = [3, 4, 7];
+  onInputUsername (event: Event) {
     this.username = (<HTMLInputElement>event.target).value;
-  };
+  }
+  onAdditionClick() {
+    this.values.push(Math.random());
+  }
 
 }

@@ -26,3 +26,19 @@
   <input type="submit" value="Enviar">
 </form>
 <p class="text-center"> {{ username }} </p>
+
+<hr>
+<p>Ahora la prueba del two-way binding</p>
+<form id="newForm">
+  <p>Please type your name below:</p>
+  <input type="text" name="name" id="name" [(ngModel)]="usernameNew">
+  <input type="submit" value="Enviar">
+</form>
+<p class="text-center"> {{ usernameNew }} </p>
+
+<hr>
+<h1 class="text-center">Nueva prueba: ahora se añaden elementos dinámicamente</h1>
+<button class="btn btn-warning" enabled (onclick)="onAdditionClick()">Añadir número</button>
+<ul >
+  <li ng-repeat="item in values"> {{ item }} </li>
+</ul>
