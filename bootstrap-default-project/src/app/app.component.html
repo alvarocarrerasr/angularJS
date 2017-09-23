@@ -37,8 +37,9 @@
 <p class="text-center"> {{ usernameNew }} </p>
 
 <hr>
-<h1 class="text-center">Nueva prueba: ahora se añaden elementos dinámicamente</h1>
-<button class="btn btn-warning" enabled (onclick)="onAdditionClick()">Añadir número</button>
+<h1 class="text-center">Nueva prueba</h1>
+<button class="btn btn-warning" disabled (onclick)="onAdditionClick()">Añadir número</button>
+
 <ul >
-  <li ng-repeat="item in values"> {{ item }} </li>
+  <li *ngFor="let item of values">{{ item }} </li>
 </ul>

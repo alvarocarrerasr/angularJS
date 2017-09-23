@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'app';
   username = '';
   usernameNew = 'usuarioInicial';
-  values = [3, 4, 7];
+  values = [3];
   onInputUsername (event: Event) {
     this.username = (<HTMLInputElement>event.target).value;
   }

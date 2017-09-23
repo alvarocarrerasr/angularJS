@@ -220,6 +220,17 @@ Son directivas que modifican el DOM, añadiendo o eliminando elementos. Por lo g
         <ng-template #noBool>
         <p>Else message</p>
         ```
+2. ngFor: para crear un bucle que itere sobre una colección de elementos.
+    ```html
+    <ul>
+    <li *ngFor="let element of arrayList"> {{ element }}</li>
+    </ul>
+    ```
+    **Importante**: el of en vez del in..
+    **Nota 0**: podremos además acceder al índice añadiendo la siguiente instrucción en ngFor: 
+        ```javascript
+        <div *ngFor="....; let i = index"></div>
+        ``` 
 ### Attribute Directives
 La mayoría de directivas **no** añaden o eliminan elementos, sino que modifican aquellos elementos que tienen asociados.
 #### NgStyle, una directiva para cambiar el estilo de los elementos.
@@ -233,5 +244,11 @@ Una directiva bastante útil y que sirve para cambiar el estilo de los diferente
     ```html
     <p [ngStyle]="{backgroundColor:'red'}">Text</p>
     ```
-**Importante**: la directiva es **ngStyle** y no **[ngStyle]**. Se pone entre corchetes porque vamos a modificar una propiedad de un elemento (ya se ha visto en otro apartado).
+**Importante**: la directiva es **ngStyle** y no **[ngStyle]**. Se pone entre corchetes porque vamos a modificar una propiedad de un elemento (ya se ha visto en otro apartado). Se denomina **property binding**.
 **Nota**: en vez de poner directamente el valor (en este caso red), podríamos haber puesto una función.
+#### NgClass
+NgClass nos permitirá modificar dinámicamente las clases CSS de un elemento.
+```html
+<p [ngClass]="{cssStyle: javascriptCondition}">Text</p>
+```
+Al igual que en el caso anterior, si tiene guión intermedio la clave, se pondrá entre comillas simples.
