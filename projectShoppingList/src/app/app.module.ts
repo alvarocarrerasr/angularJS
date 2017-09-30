@@ -8,9 +8,10 @@ import { HeaderComponent } from './header/header.component';
 /* Shopping list Components*/
 import { ShoppinglComponent } from './shoppinglist/shoppingl/shoppingl.component';
 import { ShoppingeditComponent } from './shoppinglist/shoppingedit/shoppingedit.component';
+import { ShoppingComponent } from './shoppinglist/shopping.component';
 
 /* Recipe components*/
-
+import { RecipeComponent } from './recipe/recipe.component';
 import { RecipelistComponent } from './recipe/recipelist/recipe.component';
 import { RecipeitemComponent } from './recipe/recipeitem/recipeitem.component';
 import { RecipedetailComponent } from './recipe/recipedetail/recipedetail.component';
@@ -22,9 +23,11 @@ import { RecipedetailComponent } from './recipe/recipedetail/recipedetail.compon
     // Header
     HeaderComponent,
     // Shopping list related components
+    ShoppingComponent,
     ShoppinglComponent,
     ShoppingeditComponent,
     // Recipe list related components
+    RecipeComponent,
     RecipelistComponent,
     RecipeitemComponent,
     RecipedetailComponent
