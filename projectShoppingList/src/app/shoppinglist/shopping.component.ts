@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component(
     {
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
         styleUrls: []
     }
 )
-export class ShoppingComponent {
-
+export class ShoppingComponent implements OnInit {
+    ngOnInit() {
+    }
 }

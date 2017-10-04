@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderController } from './header.controller';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +13,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  onRecipesClick() {
+    HeaderController.getInstance().setModule('recipes');
+  }
+  onIngredientsClick() {
+    HeaderController.getInstance().setModule('ingredients');
+  }
 }
