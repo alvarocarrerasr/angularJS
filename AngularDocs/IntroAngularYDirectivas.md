@@ -271,9 +271,12 @@ Es quizá uno de los más directos. Por un lado, deberemos colocar **en la plant
 ```html
 <app-timeline [VARIABLE_CHILD]="VARIABLE_PARENT"></app-timeline>
 ```
+
 En donde:
+
     1. VARIABLE_CHILD es una variable que podremos encontrar en el código TypeScript del componente **hijo** y que **tiene** el decorator **@Input()**. Nota: Input hay que importarlo del paquete @angular/core.
     2. VARIABLE_PARENT es una variable que podremos encontrar en el código TypeScript del componente **padre** y que **tiene** el decorator **@Output()**.Nota: Output hay que importarlo del paquete @angular/core.
+    
 Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compuestos (paso de parámetros por referencia), es decir, podremos tener problemas de aliasing. En el caso de tipos de datos simples (number, string...) el paso de parámetros se hará por valor, por lo que no existirá ese problema.
 
 2. Del componente hijo al padre.
