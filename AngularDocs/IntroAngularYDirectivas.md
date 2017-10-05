@@ -41,6 +41,12 @@ Posteriormente ejecutaremos el proyecto utilizando el servidor:
 ````
 ng serve
 ````
+
+Y ya cuando hayamos llegado al final del desarrollo de la app, podremos finalmente compilarlo todo en unos pocos ficheros, que podrán ser colocados **en cualquier servidor**, es decir, no hay una dependencia de que una app Angular tenga que estar colocada en un servidor Express con NodeJs (era lo que yo pensaba). El comando siguiente generará los correspondientes ficheros JS, CSS y el fichero HTML:
+```bash
+ng build --prod
+```
+El output del comando anterior se colocará en la carpeta dist del proyecto.
 **Sólo podremos ver cómo va a quedar realmente nuestro proyecto ejecutando el comando anterior.**
 
 ### Ficheros en un directorio de Angular.
@@ -252,3 +258,43 @@ NgClass nos permitirá modificar dinámicamente las clases CSS de un elemento.
 <p [ngClass]="{cssStyle: javascriptCondition}">Text</p>
 ```
 Al igual que en el caso anterior, si tiene guión intermedio la clave, se pondrá entre comillas simples.
+
+## Routes 
+
+Angular nos ofrece un paradigma de elaboración de páginas web single-page, es decir, todo se realizará sobre un mismo elemento HTML, en nuestro caso el index.html. Quizá esto podría dar a entender que no nos da la flexibilidad que podríamos requerir para poder hacer webs complejas. El routing soluciona este problema, permitiéndonos mostrar ciertas partes del sitio web, dependiendo de cuál es la ruta (path) que el usuario esté navegando.
+
+## Comunicación entre componentes (manejo de eventos)
+
+Puede llegar a ser muy interesante que dos o más componentes se puedan comunicar entre sí. Distinguimos dos tipos de comunicación:
+1. Del componente padre al hijo.
+Es quizá uno de los más directos. Por un lado, deberemos colocar **en la plantilla HTML del componente padre**, el binding de la variable que queramos asociar:
+```html
+<app-timeline [VARIABLE_CHILD]="VARIABLE_PARENT"></app-timeline>
+```
+En donde:
+    1. VARIABLE_CHILD es una variable que podremos encontrar en el código TypeScript del componente **hijo** y que **tiene** el decorator **@Input()**. Nota: Input hay que importarlo del paquete @angular/core.
+    2. VARIABLE_PARENT es una variable que podremos encontrar en el código TypeScript del componente **padre** y que **tiene** el decorator **@Output()**.Nota: Output hay que importarlo del paquete @angular/core.
+Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compuestos (paso de parámetros por referencia), es decir, podremos tener problemas de aliasing. En el caso de tipos de datos simples (number, string...) el paso de parámetros se hará por valor, por lo que no existirá ese problema.
+
+2. Del componente hijo al padre.
+    1. Para hacer un paso por parámetros del hijo al padre, primeramente tendremos que importar una serie de elementos en el **componente hijo**:
+    ```typescript
+    import { Output, EventEmitter } from '@angular/core';
+    ```
+    2. A continuación, generaremos un evento. En el código del componente hijo:
+    ```typescript
+    @Output() myNewEvent = new EventEmitter<>();
+    ```
+    Nota: en el snippet anterior, myNewEvent será el nombre del nuevo evento, y deberemos tenerlo presente a la hora de hacer el binding del evento.
+    3. Seguidamente, configuramos la emisión de eventos en el código TypeScript del hijo.
+    ```typescript
+     this.eventEmitter.emit(ELEMENT_TO_EMIT);
+    ```
+    En donde ELEMENT_TO_EMIT será el objeto que querremos pasar al padre.
+    4. Por último configuramos el listener del nuevo evento en el padre.
+        1. En el código HTML del template del padre
+        ```html
+        <app-form-add (myNewEvent)="onEvent($event)"></app-form-add>
+        ```
+        En donde, onEvent(), será el método ubicado en el código TypeScript del componente padre y myNewEvent el nombre del evento generado en el paso 2.
+        2. En el código TypeScript del padre crearemos el listener del evento, en el caso de este ejemplo se llamará onEvent().
