@@ -263,6 +263,46 @@ Al igual que en el caso anterior, si tiene guión intermedio la clave, se pondr�
 
 Angular nos ofrece un paradigma de elaboración de páginas web single-page, es decir, todo se realizará sobre un mismo elemento HTML, en nuestro caso el index.html. Quizá esto podría dar a entender que no nos da la flexibilidad que podríamos requerir para poder hacer webs complejas. El routing soluciona este problema, permitiéndonos mostrar ciertas partes del sitio web, dependiendo de cuál es la ruta (path) que el usuario esté navegando.
 
+1. Establecer las rutas en el código principal del módulo
+    1. Importar módulos Routes y RouterModule
+    ```typescript
+    import { Routes, RouterModule } from '@angular/router';
+    ```
+    2. Establecer el fichero de rutas. Consiste en un array cuyos objetos son las rutas y redirecciones.
+        * Ejemplo de redirección:
+        ```javascript
+        {path: '', redirectTo: 'recipes', pathMatch: 'full'},
+        ```
+        * Ejemplo de ruta:
+        ```javascript
+        {path: 'recipes', component: RecipeComponent},
+        ```
+    3. Añadimos al array imports del módulo la importación de las rutas:
+    ```javascript
+     imports: [
+        ...
+        RouterModule.forRoot(routes)
+        ...
+    ]
+    ```
+    En donde routes es el array de rutas cread en el punto 2.
+
+    4. Añadimos al objeto providers lo siguiente (mismo fichero):
+    ```javascript
+    providers: [
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: APP_BASE_HREF, useValue: '/' }
+        ]
+    ``` 
+    Nota: En principio el código del punto 4 puede ser sustituido por la siguiente línea (archivo index.html). Viene por defecto.
+    ```html
+    <base href="/">
+    ```
+    5. Y para terminar, añadimos la etiqueta <router-outlet> donde queramos que se muestren los componentes especificados en el punto 2.
+    ```html
+    <router-outlet></router-outlet>
+    ```
+
 ## Comunicación entre componentes (manejo de eventos)
 
 Puede llegar a ser muy interesante que dos o más componentes se puedan comunicar entre sí. Distinguimos dos tipos de comunicación:
