@@ -1,0 +1,17 @@
+<legend>
+    Añadir en el timeline</legend>
+
+<div class="form-group">
+    <label for="">Nombre tarea</label>
+    <input type="text" class="form-control" [(ngModel)]="formData.name">
+</div>
+<div class="form-group">
+    <label for="">Fecha inicio</label>
+    <input type="text" class="form-control" [(ngModel)]="formData.start">
+</div>
+<div class="form-group">
+    <label for="">Fecha fin</label>
+    <input type="text" class="form-control" [(ngModel)]="formData.end">
+</div>
+
+<button (click)="onNewTask()" class="btn btn-primary">Submit</button>

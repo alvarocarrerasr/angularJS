@@ -1,0 +1,13 @@
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <p>Formulario para añadir tarea</p>
+      <app-form-add (eventEmitter)="onEvent($event)"></app-form-add>
+    </div>
+    <div class="col-sm-6">
+      <p>Visualizador de tareas.</p>
+      <app-timeline [tasksChild]="tasks"></app-timeline>
+    </div>
+  </div>
+</div>
