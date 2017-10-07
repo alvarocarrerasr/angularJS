@@ -1,3 +1,31 @@
+<!-- TOC -->
+
+- [Intro](#intro)
+    - [Versiones de Angular.](#versiones-de-angular)
+- [Angular. Introducción a Angular.](#angular-introducción-a-angular)
+    - [Creando un proyecto con Angular.](#creando-un-proyecto-con-angular)
+        - [Ficheros en un directorio de Angular.](#ficheros-en-un-directorio-de-angular)
+        - [Instalación de plantillas CSS en un proyecto Angular](#instalación-de-plantillas-css-en-un-proyecto-angular)
+        - [¿Cómo funciona Angular?](#¿cómo-funciona-angular)
+        - [Componentes en Angular](#componentes-en-angular)
+            - [Creando un componente en Angular de forma manual](#creando-un-componente-en-angular-de-forma-manual)
+            - [Módulos en Angular](#módulos-en-angular)
+        - [Creando un componente en Angular de forma automática](#creando-un-componente-en-angular-de-forma-automática)
+    - [Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.](#databinding-comunicación-entre-la-lógica-del-negocio-código-angular-y-el-navegador-del-usuario)
+        - [Output Data (Business Logic -> HTML)](#output-data-business-logic---html)
+            - [Property binding](#property-binding)
+        - [Input Data (HTML -> Business Logic)](#input-data-html---business-logic)
+        - [Two-way binding (Business Logic <-> HTML)](#two-way-binding-business-logic---html)
+    - [Directives](#directives)
+        - [Structure Directives](#structure-directives)
+        - [Attribute Directives](#attribute-directives)
+            - [NgStyle, una directiva para cambiar el estilo de los elementos.](#ngstyle-una-directiva-para-cambiar-el-estilo-de-los-elementos)
+            - [NgClass](#ngclass)
+    - [Routes](#routes)
+    - [Comunicación entre componentes (manejo de eventos)](#comunicación-entre-componentes-manejo-de-eventos)
+    - [Custom Property Binding. (Compartición de datos entre componentes padre e hijo)](#custom-property-binding-compartición-de-datos-entre-componentes-padre-e-hijo)
+
+<!-- /TOC -->
 # Intro
 
 Angular 2 es un framework web muy utilizado hoy en día. Sin embargo, no podemos entender hoy en día Angular sin TypeScript. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de TypeScript genera código en este segundo lenguaje.
@@ -307,7 +335,7 @@ Angular nos ofrece un paradigma de elaboración de páginas web single-page, es 
 
 Puede llegar a ser muy interesante que dos o más componentes se puedan comunicar entre sí. Distinguimos dos tipos de comunicación:
 
-1. Del componente padre al hijo.
+1. Del componente padre al hijo. **(custom property binding)**
 Es quizá uno de los más directos. Por un lado, deberemos colocar **en la plantilla HTML del componente padre**, el binding de la variable que queramos asociar:
 
 ```html
@@ -322,7 +350,8 @@ En donde:
 
 Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compuestos (paso de parámetros por referencia), es decir, podremos tener problemas de aliasing. En el caso de tipos de datos simples (number, string...) el paso de parámetros se hará por valor, por lo que no existirá ese problema.
 
-2. Del componente hijo al padre.
+2. Del componente hijo al padre. 
+
     1. Para hacer un paso por parámetros del hijo al padre, primeramente tendremos que importar una serie de elementos en el **componente hijo**:
 
     ```typescript
@@ -354,3 +383,15 @@ Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compues
         En donde, onEvent(), será el método ubicado en el código TypeScript del componente padre y myNewEvent el nombre del evento generado en el paso 2.
 
         2. En el código TypeScript del padre crearemos el listener del evento, en el caso de este ejemplo se llamará onEvent().
+
+## Custom Property Binding. (Compartición de datos entre componentes padre e hijo)
+
+En ocasiones es posible que nos interese acceder a una propiedad (atributo) del componente hijo desde el componente padre (o viceversa). Esto se puede realizar mediante _custom property binding_. 
+Para ello, deberemos acudir al HTML del padre y hacer el binding:
+```html
+<app-child [VARIABLECHILD]="VARIABLEPARENT"></appchild>
+```
+Con la línea anterior estamos diciendo a Angular que el puntero VARIABLECHILD apunte a lo que contenga VARIABLEPARENT. Sin embargo, esto no es suficiente para funcionar, ya que aún el componente padre no podrá acceder a la zona de memoria referenciada. Para ello, es necesario añadir un modificador a la variable del hijo:
+```java
+@Input variablechild: number;
+```
