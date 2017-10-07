@@ -1,32 +1,35 @@
+# Angular JS Notes.
+
 <!-- TOC -->
 
-- [Intro](#intro)
-    - [Versiones de Angular.](#versiones-de-angular)
-- [Angular. Introducción a Angular.](#angular-introducción-a-angular)
-    - [Creando un proyecto con Angular.](#creando-un-proyecto-con-angular)
-        - [Ficheros en un directorio de Angular.](#ficheros-en-un-directorio-de-angular)
-        - [Instalación de plantillas CSS en un proyecto Angular](#instalación-de-plantillas-css-en-un-proyecto-angular)
-        - [¿Cómo funciona Angular?](#¿cómo-funciona-angular)
-        - [Componentes en Angular](#componentes-en-angular)
-            - [Creando un componente en Angular de forma manual](#creando-un-componente-en-angular-de-forma-manual)
-            - [Módulos en Angular](#módulos-en-angular)
-        - [Creando un componente en Angular de forma automática](#creando-un-componente-en-angular-de-forma-automática)
-    - [Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.](#databinding-comunicación-entre-la-lógica-del-negocio-código-angular-y-el-navegador-del-usuario)
-        - [Output Data (Business Logic -> HTML)](#output-data-business-logic---html)
-            - [Property binding](#property-binding)
-        - [Input Data (HTML -> Business Logic)](#input-data-html---business-logic)
-        - [Two-way binding (Business Logic <-> HTML)](#two-way-binding-business-logic---html)
-    - [Directives](#directives)
-        - [Structure Directives](#structure-directives)
-        - [Attribute Directives](#attribute-directives)
-            - [NgStyle, una directiva para cambiar el estilo de los elementos.](#ngstyle-una-directiva-para-cambiar-el-estilo-de-los-elementos)
-            - [NgClass](#ngclass)
-    - [Routes](#routes)
-    - [Comunicación entre componentes (manejo de eventos)](#comunicación-entre-componentes-manejo-de-eventos)
-    - [Custom Property Binding. (Compartición de datos entre componentes padre e hijo)](#custom-property-binding-compartición-de-datos-entre-componentes-padre-e-hijo)
+- [Angular JS Notes.](#angular-js-notes)
+- [2. Introduction](#2-introduction)
+    - [2.1. Versiones de Angular.](#21-versiones-de-angular)
+- [3. Angular. Introducción a Angular.](#3-angular-introducción-a-angular)
+    - [3.1. Creando un proyecto con Angular.](#31-creando-un-proyecto-con-angular)
+        - [3.1.1. Ficheros en un directorio de Angular.](#311-ficheros-en-un-directorio-de-angular)
+        - [3.1.2. Instalación de plantillas CSS en un proyecto Angular](#312-instalación-de-plantillas-css-en-un-proyecto-angular)
+        - [3.1.3. ¿Cómo funciona Angular?](#313-¿cómo-funciona-angular)
+        - [3.1.4. Componentes en Angular](#314-componentes-en-angular)
+            - [3.1.4.1. Creando un componente en Angular de forma manual](#3141-creando-un-componente-en-angular-de-forma-manual)
+            - [3.1.4.2. Módulos en Angular](#3142-módulos-en-angular)
+        - [3.1.5. Creando un componente en Angular de forma automática](#315-creando-un-componente-en-angular-de-forma-automática)
+    - [3.2. Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.](#32-databinding-comunicación-entre-la-lógica-del-negocio-código-angular-y-el-navegador-del-usuario)
+        - [3.2.1. Output Data (Business Logic -> HTML)](#321-output-data-business-logic---html)
+            - [3.2.1.1. Property binding](#3211-property-binding)
+        - [3.2.2. Input Data (HTML -> Business Logic)](#322-input-data-html---business-logic)
+        - [3.2.3. Two-way binding (Business Logic <-> HTML)](#323-two-way-binding-business-logic---html)
+    - [3.3. Directives](#33-directives)
+        - [3.3.1. Structure Directives](#331-structure-directives)
+        - [3.3.2. Attribute Directives](#332-attribute-directives)
+            - [3.3.2.1. NgStyle, una directiva para cambiar el estilo de los elementos.](#3321-ngstyle-una-directiva-para-cambiar-el-estilo-de-los-elementos)
+            - [3.3.2.2. NgClass](#3322-ngclass)
+        - [3.3.3. Custom Property Binding. (Compartición de datos entre componentes padre e hijo)](#333-custom-property-binding-compartición-de-datos-entre-componentes-padre-e-hijo)
+    - [3.4. Routes](#34-routes)
+    - [3.5. Comunicación entre componentes (manejo de eventos)](#35-comunicación-entre-componentes-manejo-de-eventos)
 
 <!-- /TOC -->
-# Intro
+# 2. Introduction
 
 Angular 2 es un framework web muy utilizado hoy en día. Sin embargo, no podemos entender hoy en día Angular sin TypeScript. Básicamente consiste en ser un lenguaje de programación que engloba a JavaScript, de hecho, el compilador de TypeScript genera código en este segundo lenguaje.
 
@@ -38,7 +41,7 @@ En la versión 1 de Angular, no se desarrollaba usando TypeScript. Sin embargo, 
 
 Un sitio Web de Angular cuenta con un fichero HTML que desplegará todas las vistas de nuestro sitio. Será labor de Angular traducir lo que hemos programado a HTML, JS... y de mostrar al usuario, utilizando las APIs del DOM, el sitio Web, dando así una apariencia de carga muchísimo más rápida (ya que no deberemos volver a descargar los contenidos del servidor cada vez que se realiza una petición HTTP). Los sitios web fabricados usando Angular se caracterizan por ser muy reactivos (Reactive).
 
-## Versiones de Angular.
+## 2.1. Versiones de Angular.
 
 Tenemos 2 versiones de Angular (a fecha Septiembre de 2017):
 
@@ -49,7 +52,7 @@ Tenemos 2 versiones de Angular (a fecha Septiembre de 2017):
 
 Se requerirá tener instalado NodeJS, así como NPM y Angular. Ver fichero "AngularCLITypeScript.md", que se encuentra en el root del repo para más información.
 
-# Angular. Introducción a Angular.
+# 3. Angular. Introducción a Angular.
 
 Los IDEs recomendados para programar en Angular son:
 
@@ -58,7 +61,7 @@ Los IDEs recomendados para programar en Angular son:
 
 Otros usuarios preferirán el famosísimo Atom, de Github o Sublime Text. Y siempre estará el eterno debate Emacs VS VI(M).
 
-## Creando un proyecto con Angular.
+## 3.1. Creando un proyecto con Angular.
 
 Creamos un proyecto de Angular cmediante el comando
 ````bash
@@ -77,7 +80,7 @@ ng build --prod
 El output del comando anterior se colocará en la carpeta dist del proyecto.
 **Sólo podremos ver cómo va a quedar realmente nuestro proyecto ejecutando el comando anterior.**
 
-### Ficheros en un directorio de Angular.
+### 3.1.1. Ficheros en un directorio de Angular.
 
 Me llama la atención la gran cantidad de ficheros que genera Angular CLI cuando se ejecuta el comando de nuevo proyecto. Estaba acostumbrado a otros frameworks como Cordova que generan muchos menos de serie. 
 Algunos de los que podemos encontrar son:
@@ -90,7 +93,7 @@ Algunos de los que podemos encontrar son:
     * Carpeta app: aquí se encontrarán la mayoría de archivos que editaremos en la mayor parte del tiempo.
 4. Carpeta node_modules: aquí se instalarán los paquetes que solicitemos mediante la orden npm install.
 
-### Instalación de plantillas CSS en un proyecto Angular
+### 3.1.2. Instalación de plantillas CSS en un proyecto Angular
 
 Es posible incluir hojas de estilo CSS editando directamente el fichero index.html. Sin embargo, es mejor no hacerlo así, ya que Angular nos ofrece una solución mucho mejor.
 1. Por defecto, Angular nos define un fichero "styles.css" (que se encuentra en /src), donde podremos definir nuestros propios estilos.
@@ -100,7 +103,7 @@ Es posible incluir hojas de estilo CSS editando directamente el fichero index.ht
     npm install --save bootstrap
     ````
 
-### ¿Cómo funciona Angular?
+### 3.1.3. ¿Cómo funciona Angular?
 
 Angular funciona de una manera un tanto curiosa. Si observamos el fichero HTML (index.html) podemos observar que hay una línea que pone entre etiquetas "Loading". Pues bien, es ahí el lugar que Angular sustituirá por la plantilla HTML que definamos, de tal forma que, cuando nosotros ejecutamos la orden ng serve y el usuario solicite la URL, esa será la plantilla embebida que se descargará. Todo esto funciona, obviamente, porque edita en tiempo de ejecución el DOM del navegador del usuario.
 
@@ -108,7 +111,7 @@ Similarmente, si observamos con las herramientas del desarrollador de Chrome el 
 
 Es importante señalar que cuando ejecutamos el comando ng serve, Angular ejecuta el fichero main.ts, que se encuentra en /src
 
-### Componentes en Angular
+### 3.1.4. Componentes en Angular
 
 Los componentes son la **pieza clave de Angular**. **Todo en Angular puede ser un componente.** Por ejemplo, en el home de un blog, **podríamos encontrar** los siguientes componentes:
 
@@ -122,7 +125,7 @@ Y cada componente tiene su propio código (HTML, CSS y JavaScript) totalmente in
 
 Tendremos un componente principal (root component), del que se desplegarán el resto de componentes.
 
-#### Creando un componente en Angular de forma manual
+#### 3.1.4.1. Creando un componente en Angular de forma manual
 
 Crearemos los componentes en Angular en la carpeta /src/app. Por convención, lo suyo sería crear una carpeta adicional, dentro de app para cada componente.
 El fichero fundamental de un componente es el que alberga el código TypeScript. Así pues, será el primero que deberemos crear.
@@ -158,12 +161,12 @@ Además de los anteriores podremos añadir:
 
 **NOTA: ojo con usar template en vez de templateUrl**. Estaremos devolviendo HTML y no una plantilla. Tanto selector, como styleUrl son opciones, pero templateUrl/template son siempre **obligatorios**.
 
-#### Módulos en Angular 
+#### 3.1.4.2. Módulos en Angular 
 Un módulo en Angular es un conjunto de funcionalidades, que, en nuestro caso, formarán la app final. Por tanto, un módulo engloba los componentes, haciendo así más fácil el deploy de los mismos.
 
 La configuración del módulo se puede encontrar en /src/app/app.module.ts y aquí (en el objeto declarations) es donde deberemos declarar los distintos componentes. Es importante destacar que **deberemos registrar cada uno de los componentes** (si lo hacemos de forma manual), ya que Angular no escaneará los directorios buscando componentes.
 
-### Creando un componente en Angular de forma automática
+### 3.1.5. Creando un componente en Angular de forma automática
 Todos los pasos anteriores pueden ser sustituidos por un simple comando:
 ```bash
 ng generate component [component-name]
@@ -174,11 +177,11 @@ ng g c [component-name]
 ```
 El mismo Angular nos creará una carpeta con el HTML, el fichero TypeScript de configuración del componente, un fichero de tests, así como los diferentes selectors y habrá añadido la línea correspondiente para registrarr el componente en el módulo de la aplicación.
 
-## Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.
+## 3.2. Databinding. Comunicación entre la lógica del negocio (código Angular) y el navegador del usuario.
 
 En ocasiones nos puede resultar interesante poder comunicar, por ejemplo, una variable almacenada en el código TypeScript en el HTML (o viceversa). O incluso nos puede llegar a interesar un canal de comunicación de ambos sentidos. Todo esto se tratará en este apartado.
 
-### Output Data (Business Logic -> HTML)
+### 3.2.1. Output Data (Business Logic -> HTML)
 El método más común es *String interpolation*.
 En el código HTML de la plantilla insertaremos:
 ```html
@@ -195,7 +198,7 @@ Nota: todo el texto (monolínea) encerrado entre curly braces/llaves ( {{ }} ), 
 
 Nota 2: en el código TypeScript anterior no he añadido el tipo de cada una de las variables porque TypeScript indica que no es necesario, ya que lo infiere de forma automática.
 
-#### Property binding
+#### 3.2.1.1. Property binding
 Esta es una característica derivada de la anterior. Supongamos que queremos modificar en tiempo de ejecución una propiedad de un elemento del DOM. Angular nos lo pone muy fácil, ya que será tan fácil como indicarle que la variable va a almacenar un valor que se deberá colocar como propiedad. Por ejemplo:
 
 ```html
@@ -207,7 +210,7 @@ A esta característica de Angular se la denomina Property Binding.
 
 Ojo: property binding no lleva llaves (curly braces). Angular no lo permite. Deben ser comillas dobles. 
 
-### Input Data (HTML -> Business Logic)
+### 3.2.2. Input Data (HTML -> Business Logic)
 Para hacer input data, es decir, para poder reaccionar a los eventos del usuario utilizaremos Event Binding, muy similar a los típicos on... de HTML y Javascript.
 Para poder reaccionar a los clicks de un botón (ejemplo anterior utilizaremos el event click):
 ```html
@@ -218,7 +221,7 @@ En el sitio web de [MDN](https://developer.mozilla.org/en-US/docs/Web/Events) po
 
 Los eventos, por lo general, llaman a la función listener con un argumento ($event), que contiene datos útiles, como qué elemento lo ha llamado o por qué. 
 
-### Two-way binding (Business Logic <-> HTML)
+### 3.2.3. Two-way binding (Business Logic <-> HTML)
 
 Podremos realizar el two-way binding por medio del 'ngModel', para lo cual deberemos importar @angular/forms en el array imports dentro de AppModule. Es decir, deberemos añadir lo siguiente:
 ```typescript
@@ -242,10 +245,10 @@ export class ... { ... }
 
 Por último conectaremos el elemento HTML con Angular mediante [(ngModel)]="usernameNew" (en este caso uniríamos un doble camino con la variable usernameNew).
 
-## Directives
+## 3.3. Directives
 
 Directives son instrucciones que damos desde Angular para modificar el DOM. Hay directives que se realizan desde el template HTML (p.ej. las etiquetas que vimos para añadir un componente) y otras que se hacen desde el mismo código TypeScript, que se crearán mediante decorators en el código.
-### Structure Directives
+### 3.3.1. Structure Directives
 Son directivas que modifican el DOM, añadiendo o eliminando elementos. Por lo general, suelen llevar un asterisco (*) justo delante de la directiva (así indicamos que son de este tipo).
 1. ngIf: para una estructura condicional.
     * Para else, el camino se complica un poco:
@@ -265,9 +268,9 @@ Son directivas que modifican el DOM, añadiendo o eliminando elementos. Por lo g
         ```javascript
         <div *ngFor="....; let i = index"></div>
         ``` 
-### Attribute Directives
+### 3.3.2. Attribute Directives
 La mayoría de directivas **no** añaden o eliminan elementos, sino que modifican aquellos elementos que tienen asociados.
-#### NgStyle, una directiva para cambiar el estilo de los elementos.
+#### 3.3.2.1. NgStyle, una directiva para cambiar el estilo de los elementos.
 Una directiva bastante útil y que sirve para cambiar el estilo de los diferentes elementos es ngStyle. 
 
 1. Si la propiedad a cambiar la escribimos con un guión intermedio, la propiedad irá entre comillas simples.
@@ -280,14 +283,26 @@ Una directiva bastante útil y que sirve para cambiar el estilo de los diferente
     ```
 **Importante**: la directiva es **ngStyle** y no **[ngStyle]**. Se pone entre corchetes porque vamos a modificar una propiedad de un elemento (ya se ha visto en otro apartado). Se denomina **property binding**.
 **Nota**: en vez de poner directamente el valor (en este caso red), podríamos haber puesto una función.
-#### NgClass
+#### 3.3.2.2. NgClass
 NgClass nos permitirá modificar dinámicamente las clases CSS de un elemento.
 ```html
 <p [ngClass]="{cssStyle: javascriptCondition}">Text</p>
 ```
 Al igual que en el caso anterior, si tiene guión intermedio la clave, se pondrá entre comillas simples.
 
-## Routes 
+### 3.3.3. Custom Property Binding. (Compartición de datos entre componentes padre e hijo)
+
+En ocasiones es posible que nos interese acceder a una propiedad (atributo) del componente hijo desde el componente padre (o viceversa). Esto se puede realizar mediante _custom property binding_. 
+Para ello, deberemos acudir al HTML del padre y hacer el binding:
+```html
+<app-child [VARIABLECHILD]="VARIABLEPARENT"></appchild>
+```
+Con la línea anterior estamos diciendo a Angular que el puntero VARIABLECHILD apunte a lo que contenga VARIABLEPARENT. Sin embargo, esto no es suficiente para funcionar, ya que aún el componente padre no podrá acceder a la zona de memoria referenciada. Para ello, es necesario añadir un modificador a la variable del hijo:
+```java
+@Input variablechild: number;
+```
+
+## 3.4. Routes 
 
 Angular nos ofrece un paradigma de elaboración de páginas web single-page, es decir, todo se realizará sobre un mismo elemento HTML, en nuestro caso el index.html. Quizá esto podría dar a entender que no nos da la flexibilidad que podríamos requerir para poder hacer webs complejas. El routing soluciona este problema, permitiéndonos mostrar ciertas partes del sitio web, dependiendo de cuál es la ruta (path) que el usuario esté navegando.
 
@@ -331,7 +346,7 @@ Angular nos ofrece un paradigma de elaboración de páginas web single-page, es 
     <router-outlet></router-outlet>
     ```
 
-## Comunicación entre componentes (manejo de eventos)
+## 3.5. Comunicación entre componentes (manejo de eventos)
 
 Puede llegar a ser muy interesante que dos o más componentes se puedan comunicar entre sí. Distinguimos dos tipos de comunicación:
 
@@ -364,7 +379,13 @@ Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compues
     @Output() myNewEvent = new EventEmitter<>();
     ```
 
-    Nota: en el snippet anterior, myNewEvent será el nombre del nuevo evento, y deberemos tenerlo presente a la hora de hacer el binding del evento.
+    Nota: en el snippet anterior, myNewEvent será el nombre del nuevo evento, y deberemos tenerlo presente a la hora de hacer el binding del evento. Se puede renombrar pasando un string a @Output:
+
+    ```typescript
+    @Output('oldevent') myNewEvent = new EventEmitter<>();
+    ```
+    
+    En este caso, ahora el nombre del evento sería oldevent.
 
     3. Seguidamente, configuramos la emisión de eventos en el código TypeScript del hijo.
 
@@ -384,14 +405,4 @@ Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compues
 
         2. En el código TypeScript del padre crearemos el listener del evento, en el caso de este ejemplo se llamará onEvent().
 
-## Custom Property Binding. (Compartición de datos entre componentes padre e hijo)
 
-En ocasiones es posible que nos interese acceder a una propiedad (atributo) del componente hijo desde el componente padre (o viceversa). Esto se puede realizar mediante _custom property binding_. 
-Para ello, deberemos acudir al HTML del padre y hacer el binding:
-```html
-<app-child [VARIABLECHILD]="VARIABLEPARENT"></appchild>
-```
-Con la línea anterior estamos diciendo a Angular que el puntero VARIABLECHILD apunte a lo que contenga VARIABLEPARENT. Sin embargo, esto no es suficiente para funcionar, ya que aún el componente padre no podrá acceder a la zona de memoria referenciada. Para ello, es necesario añadir un modificador a la variable del hijo:
-```java
-@Input variablechild: number;
-```
