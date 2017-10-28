@@ -5,7 +5,7 @@
 - [Angular JS Notes.](#angular-js-notes)
 - [2. Introduction](#2-introduction)
     - [2.1. Versiones de Angular.](#21-versiones-de-angular)
-- [3. Angular. Introducción a Angular.](#3-angular-introducción-a-angular)
+- [3. Angular.](#3-angular)
     - [3.1. Creando un proyecto con Angular.](#31-creando-un-proyecto-con-angular)
         - [3.1.1. Ficheros en un directorio de Angular.](#311-ficheros-en-un-directorio-de-angular)
         - [3.1.2. Instalación de plantillas CSS en un proyecto Angular](#312-instalación-de-plantillas-css-en-un-proyecto-angular)
@@ -27,6 +27,7 @@
         - [3.3.3. Custom Property Binding. (Compartición de datos entre componentes padre e hijo)](#333-custom-property-binding-compartición-de-datos-entre-componentes-padre-e-hijo)
     - [3.4. Routes](#34-routes)
     - [3.5. Comunicación entre componentes (manejo de eventos)](#35-comunicación-entre-componentes-manejo-de-eventos)
+    - [3.7 Inyección](#37-inyección)
 
 <!-- /TOC -->
 # 2. Introduction
@@ -52,7 +53,7 @@ Tenemos 2 versiones de Angular (a fecha Septiembre de 2017):
 
 Se requerirá tener instalado NodeJS, así como NPM y Angular. Ver fichero "AngularCLITypeScript.md", que se encuentra en el root del repo para más información.
 
-# 3. Angular. Introducción a Angular.
+# 3. Angular.
 
 Los IDEs recomendados para programar en Angular son:
 
@@ -404,5 +405,78 @@ Nota: recibiremos en VARIABLE_CHILD un puntero en caso de tipos de datos compues
         En donde, onEvent(), será el método ubicado en el código TypeScript del componente padre y myNewEvent el nombre del evento generado en el paso 2.
 
         2. En el código TypeScript del padre crearemos el listener del evento, en el caso de este ejemplo se llamará onEvent().
+
+## 3.7 Inyección
+Inyectar en Angular es muy común, por ejemplo, estamos inyectando código cuando creamos un componente (@NgComponent). Angular nos ofrece una forma muy fácil de compartir nombres (constantes o funciones), mediante el uso de la inyección.
+
+Inyectando funciones:
+
+* Creamos un archivo TypeScript. Por convención se añade al nombre la muletilla '.service.ts'
+```typescript
+import { Injectable } from '@angular/core';
+ @Injectable()
+ export class ANewService {
+      getSomeThing() { return stuff; }
+    }
+  ```
+ * Declaramos el servicio anterior en el fichero de configuración de la app Angular (app.module.ts)
+   ```typescript
+    import { ANewService } from './ANewService.service.ts';
+    @NgModule({
+    imports: [
+        ...
+    ],
+    declarations: [
+        ...
+    ],
+    providers: [
+        ...
+        ANewService
+    ],
+    bootstrap: [ AppComponent ]
+    })
+    export class AppModule { }
+    ```
+ * Importamos el servicio en el componente en el que lo queramos usar y lo pasamos por el constructor
+    ```typescript
+    constructor(private service: ANewService) {
+        ...
+    }
+    ```
+Por otro lado, aunque no sea inyección también podremos declarar constantes de otra forma: mediante un fichero externo que almacene las constantes. Simplemente habría que importarlo donde queramos:
+```typescript
+import * as constants from './../globals';
+```
+
+## 3.6 Conexión con Internet
+**Importante:** La documentación de este módulo es de la versión 4.3 de Angular.
+
+La conexión con Internet se realiza mediante el módulo ```@angular/common/http``` 
+
+Para realizar una conexión con Internet, importaremos en el componente el módulo HttpClient (de paso hacemos lo mismo con HttpErrorResponse):
+```typescript
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+```
+
+A continuación, definimos la información que se va a recibir en las solicitudes HTTP mediante el uso de una interfaz (útil en una API REST):
+```typescript
+interface IUserData {
+    userId: string;
+    username: string;
+}
+```
+Finalmente, hacemos la llamada. En este caso será GET (this.http.get) y recibiremos los datos como estipula la interfaz IUserData. Destacar que es posible tanto usar subscripciones como Promises.
+```typescript
+this.http.get<IUserData>(`${constants.SERVERURL}/login`).subscribe(
+      ok => {
+        this.userData = ok;
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.router.navigateByUrl('');
+        }
+      }
+    );
+```
 
 
